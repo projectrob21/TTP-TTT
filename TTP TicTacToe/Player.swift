@@ -10,7 +10,15 @@ import Foundation
 
 struct Player {
     
-    var name: String?
+    var name: String
     var symbol: String
     
+}
+
+// MARK: Able to compare and equate Photos
+extension Player: Equatable {
+    static func == (lhs:Player, rhs: Player) -> Bool {
+        return lhs.name == rhs.name &&
+            lhs.symbol == rhs.symbol
+    }
 }
