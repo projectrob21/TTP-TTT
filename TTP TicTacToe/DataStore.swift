@@ -9,7 +9,10 @@
 import Foundation
 
 final class DataStore {
+    
     static let shared = DataStore()
+    
     let playerOne = Player(name: "Player One", symbol: "❌")
+    let playerTwo = Player(name: "Player Two", symbol: "⭕️")
 
 }

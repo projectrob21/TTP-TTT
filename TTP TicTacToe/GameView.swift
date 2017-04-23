@@ -14,6 +14,8 @@ class GameView: UIView {
     let column1 = UIStackView()
     let column2 = UIStackView()
     let column3 = UIStackView()
+    
+    let gameViewModel = GameViewModel()
 
     // MARK: Initialization
     required init?(coder aDecoder: NSCoder) {
@@ -29,17 +31,23 @@ class GameView: UIView {
     func configure() {
         let columnArray = [column1, column2, column3]
         
+        var columnNum = 1
+    
         for stack in columnArray {
             stack.axis = .vertical
             stack.spacing = 0.0
             stack.distribution = .fillEqually
             
+            var rowNum = 1
             for _ in 1...3 {
-                let square = GameSquareView()
-                square.backgroundColor = UIColor().generateRandomColor()
-                stack.addArrangedSubview(square)
+                
+                let button = GameSquareButton(column: columnNum, row: rowNum)
+                button.addTarget(self, action: #selector(squareSelected(_:)), for: .touchUpInside)
+                stack.addArrangedSubview(button)
+                
+                rowNum += 1
             }
-            
+            columnNum += 1
         }
     }
     
@@ -64,3 +72,13 @@ class GameView: UIView {
         }
     }
 }
+
+extension GameView {
+    
+    func squareSelected(_ sender: UIButton) {
+        gameViewModel.squareSelected(at: sender)
+    }
+    
+}
+
+

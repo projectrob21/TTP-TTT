@@ -10,15 +10,16 @@ import Foundation
 import UIKit
 import SnapKit
 
-class GameSquareView: UIView {
-
+class GameSquareButton: UIButton {
+    
     var coordinate: (Int, Int)!
     var player: Player? {
         didSet {
-            squareButton.setTitle(player?.symbol, for: .normal)
+            self.setTitle(player?.symbol, for: .normal)
         }
     }
-    var squareButton = UIButton()
+    
+    var square: Square!
     
     // MARK: Initialization
     required init?(coder aDecoder: NSCoder) {
@@ -33,24 +34,11 @@ class GameSquareView: UIView {
     convenience init(column: Int, row: Int) {
         self.init(frame: CGRect.zero)
         
+        self.square = Square(column: column, row: row)
         self.coordinate = (column, row)
-        
-        squareButton.addTarget(self, action: #selector(squareSelected), for: .touchUpInside)
-        
-        addSubview(squareButton)
-        squareButton.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
-        
+        self.backgroundColor = UIColor().generateRandomColor()
     }
     
-
-}
-
-extension GameSquareView {
     
-    func squareSelected() {
-        print("Square in column \(coordinate), row \(coordinate) was selected")
-    }
-    
+  
 }
