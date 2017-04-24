@@ -16,7 +16,6 @@
 		E82D98641EAD39D800D0F7E9 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82D98631EAD39D800D0F7E9 /* Player.swift */; };
 		E8A169501EAD3E9800B429CC /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A1694F1EAD3E9800B429CC /* DataStore.swift */; };
 		E8A169521EAD3F1300B429CC /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A169511EAD3F1300B429CC /* GameView.swift */; };
-		E8A169541EAD419600B429CC /* GameSquareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A169531EAD419600B429CC /* GameSquareView.swift */; };
 		E8A1695B1EAD4AB300B429CC /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A1695A1EAD4AB300B429CC /* GameViewModel.swift */; };
 		E8A1695E1EAD4B8A00B429CC /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A1695D1EAD4B8A00B429CC /* Colors.swift */; };
 		E8A169601EAD595400B429CC /* GameSquareButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A1695F1EAD595400B429CC /* GameSquareButton.swift */; };
@@ -37,7 +36,6 @@
 		E82D98631EAD39D800D0F7E9 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		E8A1694F1EAD3E9800B429CC /* DataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		E8A169511EAD3F1300B429CC /* GameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
-		E8A169531EAD419600B429CC /* GameSquareView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameSquareView.swift; sourceTree = "<group>"; };
 		E8A1695A1EAD4AB300B429CC /* GameViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
 		E8A1695D1EAD4B8A00B429CC /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		E8A1695F1EAD595400B429CC /* GameSquareButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameSquareButton.swift; sourceTree = "<group>"; };
@@ -130,7 +128,6 @@
 			isa = PBXGroup;
 			children = (
 				E8A169511EAD3F1300B429CC /* GameView.swift */,
-				E8A169531EAD419600B429CC /* GameSquareView.swift */,
 				E8A1695F1EAD595400B429CC /* GameSquareButton.swift */,
 			);
 			name = Views;
@@ -274,7 +271,6 @@
 				E8A169501EAD3E9800B429CC /* DataStore.swift in Sources */,
 				E82D98641EAD39D800D0F7E9 /* Player.swift in Sources */,
 				E82D98521EAD360700D0F7E9 /* AppDelegate.swift in Sources */,
-				E8A169541EAD419600B429CC /* GameSquareView.swift in Sources */,
 				E8A169521EAD3F1300B429CC /* GameView.swift in Sources */,
 				E8A1695B1EAD4AB300B429CC /* GameViewModel.swift in Sources */,
 			);
