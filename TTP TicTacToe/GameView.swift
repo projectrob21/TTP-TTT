@@ -18,6 +18,8 @@ class GameView: UIView {
     var column2 = UIStackView()
     var column3 = UIStackView()
     
+    let spacing: CGFloat = 5.0
+    
     // TODO fix textfields
     var playerOneNameTextfield = UITextField() {
         didSet {
@@ -50,6 +52,7 @@ class GameView: UIView {
     func configure() {
         
         backgroundColor = UIColor.white
+        boardView.backgroundColor = UIColor.black
         
         resetButton.setTitle("Reset", for: .normal)
         resetButton.backgroundColor = UIColor.red
@@ -68,7 +71,7 @@ class GameView: UIView {
         for column in columnArray {
             
             column.axis = .vertical
-            column.spacing = 0.0
+            column.spacing = spacing
             column.distribution = .fillEqually
             
             var rowNum = 1
@@ -97,20 +100,19 @@ class GameView: UIView {
         boardView.addSubview(column1)
         column1.snp.makeConstraints {
             $0.leading.top.bottom.equalToSuperview()
-            $0.width.equalToSuperview().dividedBy(3)
+            $0.width.equalToSuperview().dividedBy(3).offset(-spacing/2)
         }
         
         boardView.addSubview(column2)
         column2.snp.makeConstraints {
-            $0.leading.equalTo(column1.snp.trailing)
-            $0.top.bottom.equalToSuperview()
-            $0.width.equalToSuperview().dividedBy(3)
+            $0.top.bottom.centerX.equalToSuperview()
+            $0.width.equalToSuperview().dividedBy(3).offset(-spacing)
         }
         
         boardView.addSubview(column3)
         column3.snp.makeConstraints {
             $0.top.bottom.trailing.equalToSuperview()
-            $0.width.equalToSuperview().dividedBy(3)
+            $0.width.equalToSuperview().dividedBy(3).offset(-spacing/2)
         }
         
         addSubview(resetButton)
