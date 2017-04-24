@@ -14,6 +14,8 @@ struct Player {
     var name: String
     var symbol: String
     var squares = [Square]()
+    var wins = 0
+    var losses = 0
     
     // TODO: squares should be a SET that can determine if 3 are in a row!!!
     

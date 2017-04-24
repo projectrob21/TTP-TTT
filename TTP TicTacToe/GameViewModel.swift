@@ -27,15 +27,35 @@ final class GameViewModel {
         }
     }
     
-    func squareSelected(at square: UIButton) {
-        if let square = square as? GameSquareButton {
-            currentPlayer.squares.append(square.square)
-            print("\(currentPlayer.name) as selected square at \(square.coordinate)")
-//            square.titleLabel?.text = currentPlayer.symbol
-            square.setTitle(currentPlayer.symbol, for: .normal)
+    func squareSelected(at button: UIButton) {
+        if let squareButton = button as? GameSquareButton {
+            if squareButton.square.player == nil {
+            currentPlayer.squares.append(squareButton.square)
+            squareButton.setTitle(currentPlayer.symbol, for: .normal)
+            squareButton.square.player = currentPlayer
             turnTaken()
+            }
         }
     }
+    
+    func resetGame() {
+        store.playerTwo.squares = []
+        store.playerOne.squares = []
+        
+        
+        
+        
+    }
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 }

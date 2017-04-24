@@ -19,14 +19,8 @@ struct Square {
     var column: Int!
     var row: Int!
     
-    var player: Player? {
-        didSet {
-            self.symbol = (player?.symbol)!
-        }
-    }
-    
-    var symbol = ""
-    
+    var player: Player?
+
     init(column: Int, row: Int) {
         self.coordinate = (column, row)
         
@@ -39,7 +33,6 @@ extension Square: Equatable {
         return lhs.coordinate == rhs.coordinate &&
             lhs.column == rhs.column &&
             lhs.row == rhs.row &&
-            lhs.player == rhs.player &&
-            lhs.symbol == rhs.symbol
+            lhs.player == rhs.player
     }
 }
