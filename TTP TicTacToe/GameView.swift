@@ -11,10 +11,26 @@ import UIKit
 
 class GameView: UIView {
     
+    let store = DataStore.shared
+    
     let boardView = UIView()
     var column1 = UIStackView()
     var column2 = UIStackView()
     var column3 = UIStackView()
+    
+    // TODO fix textfields
+    var playerOneNameTextfield = UITextField() {
+        didSet {
+            store.playerOne.name = playerOneNameTextfield.text!
+        }
+    }
+    var playerTwoNameTextfield = UITextField() {
+        didSet {
+            store.playerTwo.name = playerTwoNameTextfield.text!
+        }
+    }
+    var playerOneSymbolTextfield = UITextField()
+    var playerTwoSymbolTextfield = UITextField()
     
     let resetButton = UIButton()
     
@@ -33,9 +49,17 @@ class GameView: UIView {
     
     func configure() {
         
+        backgroundColor = UIColor.white
+        
         resetButton.setTitle("Reset", for: .normal)
         resetButton.backgroundColor = UIColor.red
         resetButton.addTarget(self, action: #selector(resetButtonPressed), for: .touchUpInside)
+        
+        playerOneNameTextfield.placeholder = store.playerOne.name
+        playerTwoNameTextfield.placeholder = store.playerTwo.name
+        
+        playerOneSymbolTextfield.placeholder = store.playerOne.symbol
+        playerTwoSymbolTextfield.placeholder = store.playerTwo.symbol
         
         let columnArray = [column1, column2, column3]
         
@@ -94,10 +118,31 @@ class GameView: UIView {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(boardView.snp.bottom).offset(20)
         }
+        
+        addSubview(playerOneNameTextfield)
+        playerOneNameTextfield.snp.makeConstraints {
+            $0.leading.top.equalToSuperview().offset(10)
+        }
+        
+        addSubview(playerTwoNameTextfield)
+        playerTwoNameTextfield.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(10)
+            $0.top.equalTo(playerOneNameTextfield.snp.bottom).offset(10)
+        }
+        
+        addSubview(playerOneSymbolTextfield)
+        playerOneSymbolTextfield.snp.makeConstraints {
+            $0.leading.equalTo(playerOneNameTextfield.snp.trailing).offset(10)
+            $0.centerY.equalTo(playerOneNameTextfield.snp.centerY)
+        }
+        
+        addSubview(playerTwoSymbolTextfield)
+        playerTwoSymbolTextfield.snp.makeConstraints {
+            $0.leading.equalTo(playerTwoNameTextfield.snp.trailing).offset(10)
+            $0.centerY.equalTo(playerTwoNameTextfield.snp.centerY)
+        }
     }
     
-    
-    // TODO this is probably terrible for memory
     func resetTicTacToeBoard() {
         
         let columnArray = [column1, column2, column3]
@@ -112,7 +157,6 @@ class GameView: UIView {
                 }
             }
         }
-        
     }
     
 }

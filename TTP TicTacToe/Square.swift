@@ -8,16 +8,11 @@
 
 import Foundation
 
+typealias Coordinate = (column: Int, row: Int)
+
 struct Square {
     
-    var coordinate: (Int, Int) {
-        didSet {
-            self.column = coordinate.0
-            self.row = coordinate.1
-        }
-    }
-    var column: Int!
-    var row: Int!
+    var coordinate: Coordinate!
     
     var player: Player?
 
@@ -31,8 +26,7 @@ struct Square {
 extension Square: Equatable {
     static func == (lhs:Square, rhs: Square) -> Bool {
         return lhs.coordinate == rhs.coordinate &&
-            lhs.column == rhs.column &&
-            lhs.row == rhs.row &&
+            lhs.coordinate == rhs.coordinate &&
             lhs.player == rhs.player
     }
 }

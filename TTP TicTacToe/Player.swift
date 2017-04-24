@@ -9,15 +9,23 @@
 import Foundation
 import UIKit
 
-struct Player {
+final class Player {
     
     var name: String
     var symbol: String
     var squares = [Square]()
     var wins = 0
     var losses = 0
+
     
-    // TODO: squares should be a SET that can determine if 3 are in a row!!!
+    // [Column # : Count]
+    var columnDictionary = [Int: Int]()
+    var rowDictionary = [Int: Int]()
+    
+    
+    var columns = Set<Int>()
+    var rows = Set<Int>()
+
     
     init(name: String, symbol: String) {
         self.name = name
