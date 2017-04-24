@@ -12,21 +12,22 @@ typealias Coordinate = (column: Int, row: Int)
 
 struct Square {
     
-    var coordinate: Coordinate!
-    
     var player: Player?
-
-    init(column: Int, row: Int) {
+    
+    var coordinate: Coordinate!
+    var number: Int!
+    init(column: Int, row: Int, number: Int) {
         self.coordinate = (column, row)
-        
+        self.number = number
     }
+
 }
 
 // MARK: Able to compare and equate Squares
 extension Square: Equatable {
     static func == (lhs:Square, rhs: Square) -> Bool {
-        return lhs.coordinate == rhs.coordinate &&
-            lhs.coordinate == rhs.coordinate &&
-            lhs.player == rhs.player
+        return lhs.number == rhs.number &&
+            lhs.player == rhs.player &&
+            lhs.coordinate == rhs.coordinate
     }
 }

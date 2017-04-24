@@ -30,10 +30,9 @@ class GameSquareButton: UIButton {
         
     }
     
-    convenience init(column: Int, row: Int) {
+    convenience init(column: Int, row: Int, number: Int) {
         self.init(frame: CGRect.zero)
-        
-        self.square = Square(column: column, row: row)
+        self.square = Square(column: column, row: row, number: number)
         self.backgroundColor = UIColor().generateRandomColor()
     }
     

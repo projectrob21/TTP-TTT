@@ -79,8 +79,8 @@ class GameView: UIView {
         
         let columnArray = [column1, column2, column3]
         
+        var number = 1
         var columnNum = 1
-        
         for column in columnArray {
             
             column.axis = .vertical
@@ -90,10 +90,11 @@ class GameView: UIView {
             var rowNum = 1
             for _ in 1...3 {
                 
-                let button = GameSquareButton(column: columnNum, row: rowNum)
+                let button = GameSquareButton(column: columnNum, row: rowNum, number: number)
                 button.addTarget(self, action: #selector(squareSelected(_:)), for: .touchUpInside)
                 column.addArrangedSubview(button)
                 
+                number += 1
                 rowNum += 1
             }
             columnNum += 1

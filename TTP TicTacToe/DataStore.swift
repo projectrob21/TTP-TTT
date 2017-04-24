@@ -14,5 +14,6 @@ final class DataStore {
     
     var playerOne = Player(name: "Player One", symbol: "⚗️")
     var playerTwo = Player(name: "Player Two", symbol: "🔮")
+    var computer = Player(name: "Computer", symbol: "🤖")
 
 }

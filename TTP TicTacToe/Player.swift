@@ -13,19 +13,16 @@ final class Player {
     
     var name: String
     var symbol: String
-    var squares = [Square]()
     var wins = 0
     var losses = 0
 
     
     // [Column # : Count]
-    var columnDictionary = [Int: Int]()
-    var rowDictionary = [Int: Int]()
-    
-    
-    var columns = Set<Int>()
-    var rows = Set<Int>()
+    var columnDict = [Int: Int]()
+    var rowDict = [Int: Int]()
 
+    // Useful for diagonal wins
+    var squares = Set<Int>()
     
     init(name: String, symbol: String) {
         self.name = name
