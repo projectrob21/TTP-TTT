@@ -14,11 +14,12 @@
 		E82D98591EAD360700D0F7E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E82D98581EAD360700D0F7E9 /* Assets.xcassets */; };
 		E82D985C1EAD360700D0F7E9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E82D985A1EAD360700D0F7E9 /* LaunchScreen.storyboard */; };
 		E82D98641EAD39D800D0F7E9 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82D98631EAD39D800D0F7E9 /* Player.swift */; };
+		E87004A51EAEA0D50009F633 /* AlertViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87004A41EAEA0D50009F633 /* AlertViewDelegate.swift */; };
+		E87004A71EAEA1270009F633 /* GameDecisionEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87004A61EAEA1270009F633 /* GameDecisionEnum.swift */; };
 		E8A169501EAD3E9800B429CC /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A1694F1EAD3E9800B429CC /* DataStore.swift */; };
 		E8A169521EAD3F1300B429CC /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A169511EAD3F1300B429CC /* GameView.swift */; };
-		E8A1695B1EAD4AB300B429CC /* SetGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A1695A1EAD4AB300B429CC /* SetGameViewModel.swift */; };
 		E8A1695E1EAD4B8A00B429CC /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A1695D1EAD4B8A00B429CC /* Colors.swift */; };
-		E8A169601EAD595400B429CC /* DictGameSquareButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A1695F1EAD595400B429CC /* DictGameSquareButton.swift */; };
+		E8A169601EAD595400B429CC /* GameSquareButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A1695F1EAD595400B429CC /* GameSquareButton.swift */; };
 		E8A169621EAD5ADB00B429CC /* Square.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A169611EAD5ADB00B429CC /* Square.swift */; };
 		E8FC92DD1EAE6F61006131E9 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FC92DC1EAE6F61006131E9 /* GameViewModel.swift */; };
 /* End PBXBuildFile section */
@@ -35,11 +36,12 @@
 		E82D985B1EAD360700D0F7E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E82D985D1EAD360700D0F7E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E82D98631EAD39D800D0F7E9 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		E87004A41EAEA0D50009F633 /* AlertViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertViewDelegate.swift; sourceTree = "<group>"; };
+		E87004A61EAEA1270009F633 /* GameDecisionEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameDecisionEnum.swift; sourceTree = "<group>"; };
 		E8A1694F1EAD3E9800B429CC /* DataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		E8A169511EAD3F1300B429CC /* GameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
-		E8A1695A1EAD4AB300B429CC /* SetGameViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetGameViewModel.swift; sourceTree = "<group>"; };
 		E8A1695D1EAD4B8A00B429CC /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
-		E8A1695F1EAD595400B429CC /* DictGameSquareButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictGameSquareButton.swift; sourceTree = "<group>"; };
+		E8A1695F1EAD595400B429CC /* GameSquareButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameSquareButton.swift; sourceTree = "<group>"; };
 		E8A169611EAD5ADB00B429CC /* Square.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Square.swift; sourceTree = "<group>"; };
 		E8FC92DC1EAE6F61006131E9 /* GameViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -113,6 +115,7 @@
 			children = (
 				E82D98631EAD39D800D0F7E9 /* Player.swift */,
 				E8A169611EAD5ADB00B429CC /* Square.swift */,
+				E87004A61EAEA1270009F633 /* GameDecisionEnum.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -130,7 +133,8 @@
 			isa = PBXGroup;
 			children = (
 				E8A169511EAD3F1300B429CC /* GameView.swift */,
-				E8A1695F1EAD595400B429CC /* DictGameSquareButton.swift */,
+				E8A1695F1EAD595400B429CC /* GameSquareButton.swift */,
+				E87004A41EAEA0D50009F633 /* AlertViewDelegate.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -138,7 +142,6 @@
 		E8A1695C1EAD4AC000B429CC /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				E8A1695A1EAD4AB300B429CC /* SetGameViewModel.swift */,
 				E8FC92DC1EAE6F61006131E9 /* GameViewModel.swift */,
 			);
 			name = ViewModels;
@@ -268,15 +271,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				E8A169621EAD5ADB00B429CC /* Square.swift in Sources */,
-				E8A169601EAD595400B429CC /* DictGameSquareButton.swift in Sources */,
+				E8A169601EAD595400B429CC /* GameSquareButton.swift in Sources */,
 				E82D98541EAD360700D0F7E9 /* MainViewController.swift in Sources */,
 				E8A1695E1EAD4B8A00B429CC /* Colors.swift in Sources */,
 				E8A169501EAD3E9800B429CC /* DataStore.swift in Sources */,
 				E8FC92DD1EAE6F61006131E9 /* GameViewModel.swift in Sources */,
+				E87004A71EAEA1270009F633 /* GameDecisionEnum.swift in Sources */,
 				E82D98641EAD39D800D0F7E9 /* Player.swift in Sources */,
 				E82D98521EAD360700D0F7E9 /* AppDelegate.swift in Sources */,
 				E8A169521EAD3F1300B429CC /* GameView.swift in Sources */,
-				E8A1695B1EAD4AB300B429CC /* SetGameViewModel.swift in Sources */,
+				E87004A51EAEA0D50009F633 /* AlertViewDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

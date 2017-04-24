@@ -14,8 +14,6 @@ final class Player {
     var name: String
     var symbol: String
     var wins = 0
-    var losses = 0
-
     
     // [Column # : Count]
     var columnDict = [Int: Int]()

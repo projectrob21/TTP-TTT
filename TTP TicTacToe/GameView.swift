@@ -58,6 +58,7 @@ class GameView: UIView {
     }
     
     func configure() {
+        gameViewModel.computerTurnDelegate = self
         
         backgroundColor = UIColor.white
         boardView.backgroundColor = UIColor.black
@@ -91,7 +92,7 @@ class GameView: UIView {
             for _ in 1...3 {
                 
                 let button = GameSquareButton(column: columnNum, row: rowNum, number: number)
-                button.addTarget(self, action: #selector(squareSelected(_:)), for: .touchUpInside)
+                button.addTarget(self, action: #selector(playerChoseSquare(_:)), for: .touchUpInside)
                 column.addArrangedSubview(button)
                 
                 number += 1
@@ -197,10 +198,25 @@ class GameView: UIView {
     
 }
 
-extension GameView {
+// Game Interface Methods
+extension GameView: ComputerTurnDelegate {
     
-    func squareSelected(_ sender: UIButton) {
+    func playerChoseSquare(_ sender: UIButton) {
         gameViewModel.squareSelected(at: sender)
+    }
+    
+    func computerChoseSquare(at coordinate: Coordinate) {
+        
+        let columnArray = [column1, column2, column3]
+        
+        let column = coordinate.column - 1
+        let row = coordinate.row - 1
+        
+        if let selectedButton = columnArray[column].arrangedSubviews[row] as? GameSquareButton {
+            gameViewModel.squareSelected(at: selectedButton)
+        }
+ 
+        
     }
     
     func resetButtonPressed() {

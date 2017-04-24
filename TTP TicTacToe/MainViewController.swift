@@ -26,22 +26,44 @@ class MainViewController: UIViewController {
 
     func configure() {
         gameView = GameView()
+        gameView.gameViewModel.alertViewDelegate = self
+        
         view.addSubview(gameView)
         gameView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-        
-//        gameView.resetButton.addTarget(self, action: #selector(resetFromVC), for: .touchUpInside)
     }
 
-    func resetFromVC() {
-        print("VC reset pressed")
-        gameView.gameViewModel.resetGame()
-        gameView.removeFromSuperview()
-        gameView = nil
-        
-        configure()
-        
+    
+}
+
+extension MainViewController: AlertViewDelegate {
+    
+    func presentAlert(for winner: Player?) {
+
+        if winner != nil {
+            let alertController = UIAlertController(
+                title: "We have a winner!!!",
+                message: "\(winner!.name)",
+                preferredStyle: .alert)
+            
+            let cancelAction = UIAlertAction(title: "OK", style: .cancel)
+            alertController.addAction(cancelAction)
+            
+            self.present(alertController, animated: true, completion: nil)
+
+        } else {
+            let alertController = UIAlertController(
+                title: "This games going to extra innings!",
+                message: "What a close game!",
+                preferredStyle: .alert)
+            
+            let cancelAction = UIAlertAction(title: "OK", style: .cancel)
+            alertController.addAction(cancelAction)
+            
+            self.present(alertController, animated: true, completion: nil)
+
+        }
     }
     
 }

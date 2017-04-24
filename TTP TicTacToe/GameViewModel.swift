@@ -14,15 +14,17 @@ final class GameViewModel {
     let store = DataStore.shared
     var currentPlayer: Player!
     var movesTaken = 0
+    var squaresAvailable = Set<Coordinate>()
     
     var winningSets: Set<Set<Int>>
     let leftDiagWin: Set = [1, 5, 9]
     let rightDiagWin: Set = [3, 5, 7]
     
+    var alertViewDelegate: AlertViewDelegate?
+    var computerTurnDelegate: ComputerTurnDelegate?
+    
     init() {
         currentPlayer = store.playerOne
-        
-        
         
         // Alternative Win-checking method
         let a: Set = [1, 2, 3]
@@ -35,6 +37,14 @@ final class GameViewModel {
         let h: Set = [3, 5, 7]
         
         winningSets = [a, b, c, d, e, f, g, h]
+        
+        squaresAvailable.removeAll()
+        for column in 1...3 {
+            for row in 1...3 {
+                squaresAvailable.insert(Coordinate(column: column, row: row))
+            }
+        }
+        
         
     }
     
@@ -49,47 +59,59 @@ extension GameViewModel {
                 squareButton.square.player = currentPlayer
                 squareButton.setTitle(currentPlayer.symbol, for: .normal)
                 
-                // Add to player dictionary
-                let column = squareButton.square.coordinate.column
-                let row = squareButton.square.coordinate.row
-                
-                
-                if currentPlayer.columnDict[column] == nil {
-                    currentPlayer.columnDict[squareButton.square.coordinate.column] = 1
-                } else {
-                    currentPlayer.columnDict[squareButton.square.coordinate.column] = currentPlayer.columnDict[squareButton.square.coordinate.column]! + 1
-                }
-                
-                
-                if currentPlayer.rowDict[row] == nil {
-                    currentPlayer.rowDict[row] = 1
-                } else {
-                    currentPlayer.rowDict[squareButton.square.coordinate.row] = currentPlayer.rowDict[row]! + 1
-                }
+                // Remove from squaresAvailable
+                squaresAvailable.remove(squareButton.square.coordinate)
                 
                 // Add squareNum to Set
                 currentPlayer.squares.insert(squareButton.square.number)
+                
+                /*
+                 // Add to player dictionary
+                 let column = squareButton.square.coordinate.column
+                 let row = squareButton.square.coordinate.row
+                 
+                 
+                 if currentPlayer.columnDict[column] == nil {
+                 currentPlayer.columnDict[squareButton.square.coordinate.column] = 1
+                 } else {
+                 currentPlayer.columnDict[squareButton.square.coordinate.column] = currentPlayer.columnDict[squareButton.square.coordinate.column]! + 1
+                 }
+                 
+                 
+                 if currentPlayer.rowDict[row] == nil {
+                 currentPlayer.rowDict[row] = 1
+                 } else {
+                 currentPlayer.rowDict[squareButton.square.coordinate.row] = currentPlayer.rowDict[row]! + 1
+                 }
+                 */
                 
                 // Check for win
                 if movesTaken >= 4 {
                     if checkForWin(at: squareButton.square.coordinate) {
                         print("WINNNN")
                         // resetGame()
-                        // TODO: Alert Delegate
+                        alertViewDelegate?.presentAlert(for: currentPlayer)
                     }
                 }
                 
                 
                 changeCurrentPlayer()
-                computerMove()
+                if currentPlayer.name == "Computer" {
+                    computerSquareSelection()
+                }
             }
         }
     }
     
-    func computerMove() {
-        
-        
-        
+    func computerSquareSelection() {
+        let _ = Timer.init(timeInterval: 2, repeats: false) { (timer) in
+            let squaresArray = Array(self.squaresAvailable)
+            let index = arc4random_uniform(UInt32(squaresArray.count))
+            let squareCoordinate = squaresArray[Int(index)]
+            
+            self.computerTurnDelegate?.computerChoseSquare(at: squareCoordinate)
+            
+        }
     }
     
     func changeCurrentPlayer() {
@@ -111,6 +133,7 @@ extension GameViewModel {
         // Using Set only
         for set in winningSets {
             if set.isSubset(of: currentPlayer.squares) {
+                currentPlayer.wins += 1
                 didWin = true
                 return didWin
             }
@@ -118,14 +141,14 @@ extension GameViewModel {
         
         /* Using Dictionary and Set
          
-        if currentPlayer.columnDict[coordinate.column] == 3 || currentPlayer.rowDict[coordinate.row] == 3 {
-            didWin = true
-            return didWin
-        } else if currentPlayer.squares.isSubset(of: leftDiagWin) || currentPlayer.squares.isSubset(of: rightDiagWin) {
-            didWin = true
-            return didWin
-        }
-        */
+         if currentPlayer.columnDict[coordinate.column] == 3 || currentPlayer.rowDict[coordinate.row] == 3 {
+         didWin = true
+         return didWin
+         } else if currentPlayer.squares.isSubset(of: leftDiagWin) || currentPlayer.squares.isSubset(of: rightDiagWin) {
+         didWin = true
+         return didWin
+         }
+         */
         
         return didWin
     }
@@ -145,9 +168,25 @@ extension GameViewModel {
         store.computer.rowDict = [:]
         
         movesTaken = 0
+        
+        squaresAvailable.removeAll()
+        for column in 1...3 {
+            for row in 1...3 {
+                squaresAvailable.insert(Coordinate(column: column, row: row))
+            }
+        }
+        
     }
     
+}
+
+protocol ComputerTurnDelegate {
     
+    func computerChoseSquare(at coordinate: Coordinate)
+    
+}
+
+extension GameViewModel {
     
     
     
