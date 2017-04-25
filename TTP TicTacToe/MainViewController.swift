@@ -52,7 +52,7 @@ extension MainViewController: AlertViewDelegate {
         if winner != nil {
             let alertController = UIAlertController(
                 title: "We have a winner!!!",
-                message: "\(winner!.name)",
+                message: "\(winner!.symbol)\(winner!.name)\(winner!.symbol)",
                 preferredStyle: .alert)
             
             let cancelAction = UIAlertAction(title: "OK", style: .cancel)
@@ -65,7 +65,7 @@ extension MainViewController: AlertViewDelegate {
             
         } else {
             let alertController = UIAlertController(
-                title: "This games going to overtime!",
+                title: "This one's going to overtime!",
                 message: "What a close game!",
                 preferredStyle: .alert)
             
