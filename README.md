@@ -2,7 +2,7 @@
 
 Welcome!
 
-This app brings the classic and timeless game of Tic-Tac-Toe to your fingertips. Upon opening the app, you will be shown a randomly colored playing field where you and your opponents will battle for wits. If you feel the colors do not suit your preference, simple press the "Reset" Button and a new field will be generated.
+This app brings the classic and timeless game of Tic-Tac-Toe to your fingertips. Upon opening the .xcworkspace version of the app and running on the iPhone simulator, you will be shown a randomly colored playing field where you and your opponents will battle for wits. If you feel the colors do not suit your preference, simple press the "Reset" Button and a new field will be generated.
 
 Players have the option to choose the names of the two opponents playing (however the Computer will remain static for simplicity's sake). You can also choose your emojis, which will represent territories gained.
 
