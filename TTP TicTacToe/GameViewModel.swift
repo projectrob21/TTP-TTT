@@ -53,15 +53,15 @@ extension GameViewModel {
     func squareSelected(at button: UIButton) {
         if let squareButton = button as? GameSquareButton {
             if squareButton.square.player == nil {
-                // Set up square
+                // Set up button's UI
                 squareButton.square.player = currentPlayer
                 squareButton.setTitle(currentPlayer.symbol, for: .normal)
                 
-                // Add squareNum to Set
+                // Update game
                 currentPlayer.squares.insert(squareButton.square.number)
                 squaresAvailable.remove(squareButton.square.coordinate)
                 movesTaken += 1
-                print(movesTaken)
+
                 // Check for win
                 if movesTaken >= 4 {
                     if checkForWin(at: squareButton.square.coordinate) {
@@ -135,7 +135,6 @@ extension GameViewModel {
                 squaresAvailable.insert(Coordinate(column: column, row: row))
             }
         }
-        
     }
     
 }

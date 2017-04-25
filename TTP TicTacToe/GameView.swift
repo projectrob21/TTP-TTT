@@ -24,12 +24,10 @@ class GameView: UIView {
     let spacing: CGFloat = 5.0
     
     // Player Information Objects
-    // TODO fix textfields
     var p1NameTextfield = UITextField()
     var p2NameTextfield = UITextField()
     var p1SymbolTextfield = UITextField()
     var p2SymbolTextfield = UITextField()
-    
     var p1WinsLabel = UILabel()
     var p2WinsLabel = UILabel()
     
@@ -254,7 +252,7 @@ extension GameView {
     
 }
 
-// Game Interface Methods
+// MARK: Game interface methods
 extension GameView: ComputerTurnDelegate {
     
     func playerChoseSquare(_ sender: UIButton) {
@@ -284,7 +282,7 @@ extension GameView: ComputerTurnDelegate {
     }
 }
 
-// User name and symbol updates
+// MARK: TextField Delegate for name and symbol updates
 extension GameView: UITextFieldDelegate {
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
@@ -301,8 +299,6 @@ extension GameView: UITextFieldDelegate {
         } else if textField == p2SymbolTextfield && textField.text != ""  {
             store.playerTwo.symbol = textField.text!
         }
-        print("player 1 store symbol = \(store.playerOne.symbol)")
-
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -327,7 +323,6 @@ extension GameView: UITextFieldDelegate {
         } else if textField == p2SymbolTextfield && textField.text != ""  {
             store.playerTwo.symbol = textField.text!
         }
-        print("player 1 store symbol = \(store.playerOne.symbol)")
     }
     
     
