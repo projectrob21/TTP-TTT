@@ -13,14 +13,11 @@ final class GameViewModel {
     
     let store = DataStore.shared
     var currentPlayer: Player!
-    var movesTaken = 0
-    var squaresAvailable = Set<Coordinate>()
-    
     var isComputerPlaying = false
-    
+    var movesTaken = 0
+
+    var squaresAvailable = Set<Coordinate>()
     var winningSets: Set<Set<Int>>
-    let leftDiagWin: Set = [1, 5, 9]
-    let rightDiagWin: Set = [3, 5, 7]
     
     var alertViewDelegate: AlertViewDelegate?
     var computerTurnDelegate: ComputerTurnDelegate?
@@ -28,7 +25,7 @@ final class GameViewModel {
     init() {
         currentPlayer = store.playerOne
         
-        // Alternative Win-checking method
+        // Winning combinations
         let a: Set = [1, 2, 3]
         let b: Set = [4, 5, 6]
         let c: Set = [7, 8, 9]
@@ -46,8 +43,7 @@ final class GameViewModel {
                 squaresAvailable.insert(Coordinate(column: column, row: row))
             }
         }
-        
-        
+
     }
     
 }
@@ -68,14 +64,10 @@ extension GameViewModel {
                 // Check for win
                 if movesTaken >= 4 {
                     if checkForWin(at: squareButton.square.coordinate) {
-                        // resetGame()
                         alertViewDelegate?.presentAlert(for: currentPlayer)
                         return
                     }
-                }
-                
-                // Tie: No winner found after 9 moves
-                if movesTaken == 9 {
+                } else if movesTaken == 9 {
                     alertViewDelegate?.presentAlert(for: nil)
                     return
                 }
@@ -91,25 +83,25 @@ extension GameViewModel {
     }
     
     func computerSquareSelection() {
-        let timer = Timer.init(timeInterval: 2, repeats: false) { (timer) in
+        let when = DispatchTime.now() + 1
+        DispatchQueue.main.asyncAfter(deadline: when) {
             let squaresArray = Array(self.squaresAvailable)
             let index = arc4random_uniform(UInt32(squaresArray.count - 1))
             let squareCoordinate = squaresArray[Int(index)]
             
             self.computerTurnDelegate?.computerChoseSquare(at: squareCoordinate)
-            timer.invalidate()
         }
-        timer.fire()
+    
     }
     
     func changeCurrentPlayer() {
-        if currentPlayer.symbol == store.playerOne.symbol {
+        if currentPlayer.id == store.playerOne.id {
             if isComputerPlaying {
                 currentPlayer = store.computer
             } else {
                 currentPlayer = store.playerTwo
             }
-        } else if currentPlayer.symbol == store.computer.symbol || currentPlayer.symbol == store.playerTwo.symbol {
+        } else if currentPlayer.id == store.computer.id || currentPlayer.id == store.playerTwo.id {
             currentPlayer = store.playerOne
         }
     }
@@ -117,7 +109,6 @@ extension GameViewModel {
     func checkForWin(at coordinate: Coordinate) -> Bool {
         var didWin = false
         
-        // Using Set only
         for set in winningSets {
             if set.isSubset(of: currentPlayer.squares) {
                 currentPlayer.wins += 1
@@ -125,18 +116,6 @@ extension GameViewModel {
                 return didWin
             }
         }
-        
-        /* Using Dictionary and Set
-         
-         if currentPlayer.columnDict[coordinate.column] == 3 || currentPlayer.rowDict[coordinate.row] == 3 {
-         didWin = true
-         return didWin
-         } else if currentPlayer.squares.isSubset(of: leftDiagWin) || currentPlayer.squares.isSubset(of: rightDiagWin) {
-         didWin = true
-         return didWin
-         }
-         */
-        
         return didWin
     }
     
@@ -144,15 +123,7 @@ extension GameViewModel {
         store.playerTwo.squares.removeAll()
         store.playerOne.squares.removeAll()
         store.computer.squares.removeAll()
-        /*
-        store.playerTwo.columnDict = [:]
-        store.playerOne.columnDict = [:]
-        store.computer.columnDict = [:]
-        
-        store.playerOne.rowDict = [:]
-        store.playerTwo.rowDict = [:]
-        store.computer.rowDict = [:]
-        */
+
         movesTaken = 0
         
         squaresAvailable.removeAll()

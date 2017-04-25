@@ -15,6 +15,7 @@ enum PlayerType {
 
 final class Player {
     
+    var id: Int
     var name: String
     var symbol: String
     var wins = 0
@@ -27,7 +28,8 @@ final class Player {
     // Useful for diagonal wins
     var squares = Set<Int>()
     
-    init(name: String, symbol: String, type: PlayerType) {
+    init(id: Int, name: String, symbol: String, type: PlayerType) {
+        self.id = id
         self.name = name
         self.symbol = symbol
         self.type = type
