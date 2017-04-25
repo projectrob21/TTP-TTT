@@ -25,17 +25,8 @@ class GameView: UIView {
     
     // Player Information Objects
     // TODO fix textfields
-    var p1NameTextfield = UITextField() {
-        didSet {
-            store.playerOne.name = p1NameTextfield.text!
-        }
-    }
-    var p2NameTextfield = UITextField() {
-        didSet {
-            print("DID SETTING")
-            store.playerTwo.name = p2NameTextfield.text!
-        }
-    }
+    var p1NameTextfield = UITextField()
+    var p2NameTextfield = UITextField()
     var p1SymbolTextfield = UITextField()
     var p2SymbolTextfield = UITextField()
     
@@ -63,16 +54,17 @@ class GameView: UIView {
     func configure() {
         gameViewModel.computerTurnDelegate = self
         
-        backgroundColor = UIColor.white
-        
         let items = ["2-Person", "Computer"]
         segmentedControl = UISegmentedControl(items: items)
         segmentedControl.selectedSegmentIndex = 0
         segmentedControl.addTarget(self, action: #selector(segmentedControlChanged), for: .allEvents)
         
         titleLabel.text = "Tic-Tac-Toe"
+        titleLabel.font = UIFont(name: "MarkerFelt-Thin", size: 40)
+        titleLabel.shadowColor = UIColor.cyan
+        titleLabel.shadowOffset = CGSize(width: 2, height: 0)
         
-        resetButton.setTitle("Rage Quit 😡", for: .normal)
+        resetButton.setTitle("Reset Game", for: .normal)
         resetButton.backgroundColor = UIColor.red
         resetButton.addTarget(self, action: #selector(resetButtonPressed), for: .touchUpInside)
         
@@ -113,6 +105,7 @@ class GameView: UIView {
                 
                 let button = GameSquareButton(column: columnNum, row: rowNum, number: number)
                 button.layer.cornerRadius = 10
+                button.titleLabel?.font = UIFont(name: "HelveticaNeue-Light", size: 60)
                 button.addTarget(self, action: #selector(playerChoseSquare(_:)), for: .touchUpInside)
                 column.addArrangedSubview(button)
                 
@@ -133,7 +126,7 @@ class GameView: UIView {
         addSubview(p1NameTextfield)
         p1NameTextfield.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(10)
-            $0.top.equalTo(titleLabel.snp.bottom).offset(10)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(20)
         }
         
         addSubview(p2NameTextfield)
@@ -213,6 +206,8 @@ extension GameView {
         segmentedControl.isHidden = false
         enableTextField(true)
         allowNameEditting = true
+        resetButton.setTitle("Reset Game", for: .normal)
+        
         let columnArray = [column1, column2, column3]
         
         for column in columnArray {
@@ -265,6 +260,8 @@ extension GameView: ComputerTurnDelegate {
         segmentedControl.isHidden = true
         enableTextField(false)
         allowNameEditting = false
+        resetButton.setTitle("Rage Quit 😡", for: .normal)
+
         gameViewModel.squareSelected(at: sender)
     }
     
@@ -283,12 +280,6 @@ extension GameView: ComputerTurnDelegate {
     func resetButtonPressed() {
         resetTicTacToeBoard()
         gameViewModel.resetGame()
-        p1WinsLabel.text = "\(store.playerOne.wins)"
-        if segmentedControl.selectedSegmentIndex == 1 {
-            p2WinsLabel.text = "\(store.computer.wins)"
-        } else {
-            p1WinsLabel.text = "\(store.playerTwo.wins)"
-        }
     }
 }
 
@@ -301,13 +292,13 @@ extension GameView: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == p1NameTextfield && textField.text != "" {
-            store.playerOne.name = textField.text!
+            gameViewModel.store.playerOne.name = textField.text!
         } else if textField == p1SymbolTextfield && textField.text != ""  {
-            store.playerOne.symbol = textField.text!
+            gameViewModel.store.playerOne.symbol = textField.text!
         } else if textField == p2NameTextfield && textField.text != ""  {
             store.playerTwo.name = textField.text!
         } else if textField == p2SymbolTextfield && textField.text != ""  {
-            store.playerTwo.symbol = textField.text!
+            gameViewModel.store.playerTwo.symbol = textField.text!
         }
     }
     
@@ -321,13 +312,14 @@ extension GameView: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == p1NameTextfield && textField.text != "" {
-            store.playerOne.name = textField.text!
+            gameViewModel.store.playerOne.name = textField.text!
+            
         } else if textField == p1SymbolTextfield && textField.text != ""  {
-            store.playerOne.symbol = textField.text!
+            gameViewModel.store.playerOne.symbol = textField.text!
         } else if textField == p2NameTextfield && textField.text != ""  {
-            store.playerTwo.name = textField.text!
+            gameViewModel.store.playerTwo.name = textField.text!
         } else if textField == p2SymbolTextfield && textField.text != ""  {
-            store.playerTwo.symbol = textField.text!
+            gameViewModel.store.playerTwo.symbol = textField.text!
         }
     }
     

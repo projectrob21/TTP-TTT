@@ -64,6 +64,7 @@ extension GameViewModel {
                 // Check for win
                 if movesTaken >= 4 {
                     if checkForWin(at: squareButton.square.coordinate) {
+                        
                         alertViewDelegate?.presentAlert(for: currentPlayer)
                         return
                     }
@@ -91,7 +92,6 @@ extension GameViewModel {
             
             self.computerTurnDelegate?.computerChoseSquare(at: squareCoordinate)
         }
-    
     }
     
     func changeCurrentPlayer() {
