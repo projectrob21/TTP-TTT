@@ -65,7 +65,7 @@ class GameView: UIView {
         titleLabel.shadowOffset = CGSize(width: 2, height: 0)
         
         resetButton.setTitle("Reset Game", for: .normal)
-        resetButton.backgroundColor = UIColor.red
+        resetButton.backgroundColor = UIColor.themeCoral
         resetButton.addTarget(self, action: #selector(resetButtonPressed), for: .touchUpInside)
         
         p1NameTextfield.text = store.playerOne.name
@@ -189,6 +189,7 @@ class GameView: UIView {
         resetButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(boardView.snp.bottom).offset(20)
+            $0.width.equalToSuperview().dividedBy(3)
         }
         
         addSubview(segmentedControl)
@@ -292,35 +293,41 @@ extension GameView: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == p1NameTextfield && textField.text != "" {
-            gameViewModel.store.playerOne.name = textField.text!
+            store.playerOne.name = textField.text!
         } else if textField == p1SymbolTextfield && textField.text != ""  {
-            gameViewModel.store.playerOne.symbol = textField.text!
+            store.playerOne.symbol = textField.text!
         } else if textField == p2NameTextfield && textField.text != ""  {
             store.playerTwo.name = textField.text!
         } else if textField == p2SymbolTextfield && textField.text != ""  {
-            gameViewModel.store.playerTwo.symbol = textField.text!
+            store.playerTwo.symbol = textField.text!
         }
+        print("player 1 store symbol = \(store.playerOne.symbol)")
+
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+
         return true
     }
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
         return true
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
+        
         if textField == p1NameTextfield && textField.text != "" {
-            gameViewModel.store.playerOne.name = textField.text!
-            
+            store.playerOne.name = textField.text!
         } else if textField == p1SymbolTextfield && textField.text != ""  {
-            gameViewModel.store.playerOne.symbol = textField.text!
+            store.playerOne.symbol = textField.text!
         } else if textField == p2NameTextfield && textField.text != ""  {
-            gameViewModel.store.playerTwo.name = textField.text!
+            store.playerTwo.name = textField.text!
         } else if textField == p2SymbolTextfield && textField.text != ""  {
-            gameViewModel.store.playerTwo.symbol = textField.text!
+            store.playerTwo.symbol = textField.text!
         }
+        print("player 1 store symbol = \(store.playerOne.symbol)")
     }
     
     

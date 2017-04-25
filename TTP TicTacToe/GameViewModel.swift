@@ -59,8 +59,9 @@ extension GameViewModel {
                 
                 // Add squareNum to Set
                 currentPlayer.squares.insert(squareButton.square.number)
+                squaresAvailable.remove(squareButton.square.coordinate)
                 movesTaken += 1
-                
+                print(movesTaken)
                 // Check for win
                 if movesTaken >= 4 {
                     if checkForWin(at: squareButton.square.coordinate) {
@@ -68,7 +69,9 @@ extension GameViewModel {
                         alertViewDelegate?.presentAlert(for: currentPlayer)
                         return
                     }
-                } else if movesTaken == 9 {
+                }
+                
+                if movesTaken == 9 {
                     alertViewDelegate?.presentAlert(for: nil)
                     return
                 }
@@ -76,7 +79,6 @@ extension GameViewModel {
                 // If no winner or tie, change player
                 changeCurrentPlayer()
                 if currentPlayer.type == .computer {
-                    squaresAvailable.remove(squareButton.square.coordinate)
                     computerSquareSelection()
                 }
             }
@@ -87,7 +89,8 @@ extension GameViewModel {
         let when = DispatchTime.now() + 1
         DispatchQueue.main.asyncAfter(deadline: when) {
             let squaresArray = Array(self.squaresAvailable)
-            let index = arc4random_uniform(UInt32(squaresArray.count - 1))
+            
+            let index = arc4random_uniform(UInt32(squaresArray.count))
             let squareCoordinate = squaresArray[Int(index)]
             
             self.computerTurnDelegate?.computerChoseSquare(at: squareCoordinate)

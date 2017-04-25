@@ -15,7 +15,8 @@ extension UIColor {
     
     public static let backgroundLight = UIColor(red: 255/255, green: 255/255, blue: 166/255, alpha: 1)
     
-    public static let darkBlue = UIColor(red: 21/255, green: 36/255, blue: 131/255, alpha: 1)
+    public static let themeCoral = UIColor(red: 242 / 255, green: 100 / 255, blue: 80 / 255, alpha: 1)
+
     
     func generateRandomColor() -> UIColor {
         let red = Double(arc4random_uniform(256))

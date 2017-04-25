@@ -185,6 +185,7 @@
 				TargetAttributes = {
 					E82D984D1EAD360600D0F7E9 = {
 						CreatedOnToolsVersion = 8.3;
+						DevelopmentTeam = 9TAE6F86BV;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -408,6 +409,7 @@
 			baseConfigurationReference = B6A33DB4184CB774F774874F /* Pods-TTP TicTacToe.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 9TAE6F86BV;
 				INFOPLIST_FILE = "TTP TicTacToe/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "rob.TTP-TicTacToe";
@@ -421,6 +423,7 @@
 			baseConfigurationReference = 71E6F4150A5DD1163A013345 /* Pods-TTP TicTacToe.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 9TAE6F86BV;
 				INFOPLIST_FILE = "TTP TicTacToe/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "rob.TTP-TicTacToe";
