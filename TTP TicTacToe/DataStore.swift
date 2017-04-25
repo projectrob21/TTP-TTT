@@ -12,8 +12,8 @@ final class DataStore {
     
     static let shared = DataStore()
     
-    var playerOne = Player(name: "Player One", symbol: "⚗️")
-    var playerTwo = Player(name: "Player Two", symbol: "🔮")
-    var computer = Player(name: "Computer", symbol: "🤖")
+    var playerOne = Player(name: "Player One", symbol: "⚗️", type: .human)
+    var playerTwo = Player(name: "Player Two", symbol: "🔮", type: .human)
+    var computer = Player(name: "Computer", symbol: "🤖", type: .computer)
 
 }

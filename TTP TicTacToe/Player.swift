@@ -9,11 +9,16 @@
 import Foundation
 import UIKit
 
+enum PlayerType {
+    case human, computer
+}
+
 final class Player {
     
     var name: String
     var symbol: String
     var wins = 0
+    var type: PlayerType
     
     // [Column # : Count]
     var columnDict = [Int: Int]()
@@ -22,9 +27,10 @@ final class Player {
     // Useful for diagonal wins
     var squares = Set<Int>()
     
-    init(name: String, symbol: String) {
+    init(name: String, symbol: String, type: PlayerType) {
         self.name = name
         self.symbol = symbol
+        self.type = type
     }
     
 }

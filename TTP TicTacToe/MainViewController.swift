@@ -17,13 +17,6 @@ class MainViewController: UIViewController {
         configure()
     }
 
-
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
     func configure() {
         gameView = GameView()
         gameView.gameViewModel.alertViewDelegate = self
@@ -34,6 +27,10 @@ class MainViewController: UIViewController {
         }
     }
 
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
     
 }
 
@@ -54,7 +51,7 @@ extension MainViewController: AlertViewDelegate {
 
         } else {
             let alertController = UIAlertController(
-                title: "This games going to extra innings!",
+                title: "This games going to overtime!",
                 message: "What a close game!",
                 preferredStyle: .alert)
             

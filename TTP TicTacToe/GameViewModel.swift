@@ -16,6 +16,8 @@ final class GameViewModel {
     var movesTaken = 0
     var squaresAvailable = Set<Coordinate>()
     
+    var isComputerPlaying = false
+    
     var winningSets: Set<Set<Int>>
     let leftDiagWin: Set = [1, 5, 9]
     let rightDiagWin: Set = [3, 5, 7]
@@ -59,38 +61,13 @@ extension GameViewModel {
                 squareButton.square.player = currentPlayer
                 squareButton.setTitle(currentPlayer.symbol, for: .normal)
                 
-                // Remove from squaresAvailable
-                squaresAvailable.remove(squareButton.square.coordinate)
-
                 // Add squareNum to Set
                 currentPlayer.squares.insert(squareButton.square.number)
                 movesTaken += 1
-
-                /*
-                 // Add to player dictionary
-                 let column = squareButton.square.coordinate.column
-                 let row = squareButton.square.coordinate.row
-                 
-                 
-                 if currentPlayer.columnDict[column] == nil {
-                 currentPlayer.columnDict[squareButton.square.coordinate.column] = 1
-                 } else {
-                 currentPlayer.columnDict[squareButton.square.coordinate.column] = currentPlayer.columnDict[squareButton.square.coordinate.column]! + 1
-                 }
-                 
-                 
-                 if currentPlayer.rowDict[row] == nil {
-                 currentPlayer.rowDict[row] = 1
-                 } else {
-                 currentPlayer.rowDict[squareButton.square.coordinate.row] = currentPlayer.rowDict[row]! + 1
-                 }
-                 */
                 
                 // Check for win
-
                 if movesTaken >= 4 {
                     if checkForWin(at: squareButton.square.coordinate) {
-                        print("WINNNN")
                         // resetGame()
                         alertViewDelegate?.presentAlert(for: currentPlayer)
                         return
@@ -98,15 +75,15 @@ extension GameViewModel {
                 }
                 
                 // Tie: No winner found after 9 moves
-                print("moves taken = \(movesTaken)")
                 if movesTaken == 9 {
                     alertViewDelegate?.presentAlert(for: nil)
                     return
                 }
                 
-                
+                // If no winner or tie, change player
                 changeCurrentPlayer()
-                if currentPlayer.name == "Computer" {
+                if currentPlayer.type == .computer {
+                    squaresAvailable.remove(squareButton.square.coordinate)
                     computerSquareSelection()
                 }
             }
@@ -114,14 +91,11 @@ extension GameViewModel {
     }
     
     func computerSquareSelection() {
-       print("computer selecting square")
         let timer = Timer.init(timeInterval: 2, repeats: false) { (timer) in
             let squaresArray = Array(self.squaresAvailable)
             let index = arc4random_uniform(UInt32(squaresArray.count - 1))
-            print("index selected is \(index)")
             let squareCoordinate = squaresArray[Int(index)]
             
-            print("has selected \(squareCoordinate)")
             self.computerTurnDelegate?.computerChoseSquare(at: squareCoordinate)
             timer.invalidate()
         }
@@ -130,14 +104,15 @@ extension GameViewModel {
     
     func changeCurrentPlayer() {
         if currentPlayer.symbol == store.playerOne.symbol {
-            currentPlayer = store.computer
-        } else if currentPlayer.symbol == store.computer.symbol {
+            if isComputerPlaying {
+                currentPlayer = store.computer
+            } else {
+                currentPlayer = store.playerTwo
+            }
+        } else if currentPlayer.symbol == store.computer.symbol || currentPlayer.symbol == store.playerTwo.symbol {
             currentPlayer = store.playerOne
         }
-        print("current player is now \(currentPlayer.name)")
     }
-    
-    
     
     func checkForWin(at coordinate: Coordinate) -> Bool {
         var didWin = false
@@ -166,11 +141,10 @@ extension GameViewModel {
     }
     
     func resetGame() {
-        print("reset")
         store.playerTwo.squares.removeAll()
         store.playerOne.squares.removeAll()
         store.computer.squares.removeAll()
-        
+        /*
         store.playerTwo.columnDict = [:]
         store.playerOne.columnDict = [:]
         store.computer.columnDict = [:]
@@ -178,7 +152,7 @@ extension GameViewModel {
         store.playerOne.rowDict = [:]
         store.playerTwo.rowDict = [:]
         store.computer.rowDict = [:]
-        
+        */
         movesTaken = 0
         
         squaresAvailable.removeAll()
@@ -189,24 +163,5 @@ extension GameViewModel {
         }
         
     }
-    
-}
-
-protocol ComputerTurnDelegate {
-    
-    func computerChoseSquare(at coordinate: Coordinate)
-    
-}
-
-extension GameViewModel {
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
 }
